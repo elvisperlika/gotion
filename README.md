@@ -1,2 +1,3 @@
 # gotion
-🗒️ Slef hosted Notion clone. 
+
+🗒️ Self hosted Notion clone.

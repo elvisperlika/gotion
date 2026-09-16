@@ -1,4 +1,4 @@
-## Quality Attribute Scenarios
+### Non functional requirements
 
 Non-functional requirements, expressed as six-part scenarios (*source, stimulus,
 artifact, environment, response, response measure*). Each scenario is testable:
@@ -8,7 +8,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 4 vCPU and 8 GB RAM**, serving a workspace of **50 members, 10 000 pages and
 1 000 000 blocks**, unless a scenario states otherwise.
 
-### Performance
+#### Performance
 
 **QA-01 — Editor input latency** *(constrains US-08, US-09)*
 
@@ -54,7 +54,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | Page is rendered and accepts input |
 | Response measure | Interactive within 1.5 s (p95) |
 
-### Availability
+#### Availability
 
 **QA-05 — Process crash without data loss** *(constrains US-04, US-08)*
 
@@ -78,7 +78,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | The editor stays usable, buffers edits locally, and reconciles them on reconnect without prompting the user to resolve conflicts |
 | Response measure | 100 % of buffered edits are applied; reconnection completes within 10 s of link restoration |
 
-### Data Consistency
+#### Data Consistency
 
 **QA-07 — Concurrent edit convergence** *(constrains US-12)*
 
@@ -91,7 +91,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | All replicas converge to an identical document state; no acknowledged edit is silently discarded |
 | Response measure | 100 % convergence within 2 s of the last edit, verified by an automated test over 1 000 randomized operation interleavings |
 
-### Security
+#### Security
 
 **QA-08 — Unauthorized page access** *(constrains US-11)*
 
@@ -115,7 +115,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | Stored credentials are unusable; repeated attempts are throttled |
 | Response measure | No password stored in plaintext or reversibly (Argon2id, per-user salt); more than 5 failed attempts per account per 15 minutes triggers rate limiting |
 
-### Deployability
+#### Deployability
 
 **QA-10 — Fresh self-hosted installation**
 
@@ -128,7 +128,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | A running instance with an initial administrator account |
 | Response measure | Reachable within 10 minutes using one documented command; schema migrations run automatically, with no manual database step |
 
-### Modifiability
+#### Modifiability
 
 **QA-11 — Adding a block type** *(constrains US-09)*
 
@@ -141,7 +141,7 @@ The reference deployment for every scenario is a **single self-hosted node with
 | Response | The type is available end to end: creation, persistence, rendering, search |
 | Response measure | Completed in under one day; changes confined to the block-type registry and the new type's renderer, with no change to the synchronization engine or the persistence schema |
 
-### Accessibility
+#### Accessibility
 
 **QA-12 — Keyboard-only and assistive-technology editing** *(constrains US-08, US-09)*
 

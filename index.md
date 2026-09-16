@@ -1,6 +1,6 @@
 # Gotion
 
-🗒️ Self-hosted Notion clone — requirements.
+🗒️ Self-hosted Notion clone.
 
 * TOC
 {:toc}

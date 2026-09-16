@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} · {{ site.title }}</title>
+<link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+
+<nav class="chapters">
+  <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <ol>
+  {% assign chapters = site.pages | where_exp: "p", "p.nav_order" | sort: "nav_order" %}
+  {% for c in chapters %}
+    <li{% if c.url == page.url %} class="current"{% endif %}><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
+  {% endfor %}
+  </ol>
+</nav>
+
+<main>
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+</main>
+
+<aside class="on-this-page"><b>On this page</b><ul></ul></aside>
+
+<script>
+// right sidebar: built from the rendered headings, kramdown already gave them ids
+const list = document.querySelector('.on-this-page ul');
+for (const h of document.querySelectorAll('main h2, main h3')) {
+  const li = document.createElement('li');
+  li.className = h.tagName;
+  li.innerHTML = '<a href="#' + h.id + '"></a>';
+  li.firstChild.textContent = h.textContent;
+  list.append(li);
+}
+if (!list.children.length) document.querySelector('.on-this-page').hidden = true;
+</script>
+
+</body>
+</html>

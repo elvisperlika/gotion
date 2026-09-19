@@ -23,19 +23,29 @@
   {{ content }}
 </main>
 
-<aside class="on-this-page"><b>On this page</b><ul></ul></aside>
+<aside class="on-this-page"><b>Contents</b><ul></ul></aside>
 
 <script>
 // right sidebar: built from the rendered headings, kramdown already gave them ids
-const list = document.querySelector('.on-this-page ul');
-for (const h of document.querySelectorAll('main h2, main h3')) {
+const asideEl = document.querySelector('.on-this-page');
+const list = asideEl.querySelector('ul');
+const headings = [...document.querySelectorAll('main h2, main h3')];
+for (const h of headings) {
   const li = document.createElement('li');
   li.className = h.tagName;
   li.innerHTML = '<a href="#' + h.id + '"></a>';
   li.firstChild.textContent = h.textContent;
   list.append(li);
 }
-if (!list.children.length) document.querySelector('.on-this-page').hidden = true;
+if (!headings.length) asideEl.hidden = true;
+
+// scroll-spy: highlight whichever heading is in the top band of the viewport
+// ponytail: "top 30% of viewport" is an approximation, not exact closest-heading math — good enough for chapter-length pages
+const linkByHeadingId = new Map(headings.map(h => [h.id, list.querySelector('a[href="#' + h.id + '"]')]));
+const spy = new IntersectionObserver(entries => {
+  for (const entry of entries) linkByHeadingId.get(entry.target.id)?.classList.toggle('active', entry.isIntersecting);
+}, { rootMargin: '0px 0px -70% 0px' });
+headings.forEach(h => spy.observe(h));
 </script>
 
 </body>

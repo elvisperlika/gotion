@@ -13,4 +13,3 @@ These goals explain why Gotion is being built instead of adopting an existing to
 * **BR-05 — Make migration familiar:** Teams already using Notion should not have to learn an entirely new way of working. Gotion must support familiar features such as nested pages, collaborative editing, comments, and search.
 
 * **BR-06 — Make the system auditable and adaptable:** Gotion is released under the GNU General Public License v3. Organizations can inspect how it handles their data, modify it to meet their needs, and verify the privacy guarantees behind BR-01.
-
